@@ -21,7 +21,27 @@ public class Menu {
             String email = JOptionPane.showInputDialog("Email?");
             dao.cadastrar(new Pessoa(nome, fone, email));
             JOptionPane.showMessageDialog(null, "Cadastro ok!");
-          break;  
+          break;
+          case 2:
+          //atualizar
+          break;
+          case 3:{
+            int codigo = 
+            Integer.parseInt(JOptionPane.showInputDialog("Código?"));
+            dao.apagar(new Pessoa(codigo));
+            JOptionPane.showMessageDialog(null, "Ok, apagou!");
+            break;
+          }
+          case 4:{
+            int codigo = Integer.parseInt(JOptionPane.showInputDialog("Código?"));
+            Pessoa p = dao.buscarPeloCodigo(codigo);
+            if (p != null){
+              JOptionPane.showMessageDialog(null, p);
+            }
+            else
+              JOptionPane.showMessageDialog(null, "Pessoa não existe");
+            break;
+          }
         }
       }
       catch (Exception e){

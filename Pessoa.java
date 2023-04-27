@@ -4,10 +4,16 @@ public class Pessoa {
   private String fone;
   private String email;
 
+  public Pessoa(){}
+
   public Pessoa(String nome, String fone, String email){
     setNome(nome);
     setFone(fone);
     setEmail(email);
+  }
+  
+  public Pessoa(int codigo){
+    setCodigo(codigo);
   }
   
   public int getCodigo() {
@@ -37,5 +43,15 @@ public class Pessoa {
 
   public void setNome(String nome) {
     this.nome = nome;
+  }
+
+  @Override
+  public String toString() {
+    return String.format(
+      "nome: %s, fone: %s, email: %s",
+      nome,
+      fone,
+      email
+    );
   }
 }

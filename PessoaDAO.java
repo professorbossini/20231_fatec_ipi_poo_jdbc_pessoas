@@ -1,5 +1,6 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 //data access object
 public class PessoaDAO {
   //CRUD: CREATE, READ, UPDATE, DELETE
@@ -36,6 +37,19 @@ public class PessoaDAO {
     //6. Fechar as coisas
     ps.close();
     conexao.close();    
+  }
+
+  Pessoa buscarPeloCodigo(int codigo) throws Exception{
+    String sql = "SELECT nome, fone, email FROM tb_pessoa WHERE cod_pessoa = ?";
+    //try-with-resources
+    try(
+      Connection conexao = ConnectionFactory.obterConexao();
+      PreparedStatement ps = conexao.prepareStatement(sql);
+    ){
+      ps.setInt(1, codigo);
+      ResultSet rs = ps.executeQuery();
+      return rs.next() ? new Pessoa(rs.getString("nome"), rs.getString("fone"), rs.getString("email")) : null;
+    }
   }
 
 }
