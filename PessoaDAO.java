@@ -22,4 +22,20 @@ public class PessoaDAO {
     conexao.close();
   }
 
+  public void apagar (Pessoa p) throws Exception{
+    //1. Especificar o comando SQL
+    String sql = "DELETE FROM tb_pessoa WHERE cod_pessoa = ?";
+    //2. Abrir uma conexão
+    var conexao = ConnectionFactory.obterConexao();
+    //3. Preparar o comando
+    var ps = conexao.prepareStatement(sql);
+    //4. Substituir os eventuais placeholders
+    ps.setInt(1, p.getCodigo());
+    //5. Executar
+    ps.execute();
+    //6. Fechar as coisas
+    ps.close();
+    conexao.close();    
+  }
+
 }

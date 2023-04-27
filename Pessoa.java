@@ -3,6 +3,12 @@ public class Pessoa {
   private String nome;
   private String fone;
   private String email;
+
+  public Pessoa(String nome, String fone, String email){
+    setNome(nome);
+    setFone(fone);
+    setEmail(email);
+  }
   
   public int getCodigo() {
     return codigo;
