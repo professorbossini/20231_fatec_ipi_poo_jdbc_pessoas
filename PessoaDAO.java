@@ -1,8 +1,5 @@
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.LinkedList;
-import java.util.List;
+import java.sql.*;
+import java.util.*;
 //data access object
 public class PessoaDAO {
   //CRUD: CREATE, READ, UPDATE, DELETE
@@ -29,9 +26,9 @@ public class PessoaDAO {
     //1. Especificar o comando SQL
     String sql = "DELETE FROM tb_pessoa WHERE cod_pessoa = ?";
     //2. Abrir uma conexão
-    var conexao = ConnectionFactory.obterConexao();
+    Connection conexao = ConnectionFactory.obterConexao();
     //3. Preparar o comando
-    var ps = conexao.prepareStatement(sql);
+    PreparedStatement ps = conexao.prepareStatement(sql);
     //4. Substituir os eventuais placeholders
     ps.setInt(1, p.getCodigo());
     //5. Executar
@@ -62,16 +59,16 @@ public class PessoaDAO {
     //3. Preparar o comando
     //4. Substituir os eventuais placeholders
     //5. Executar
-    try(var conexao = ConnectionFactory.obterConexao();
-          var ps = conexao.prepareStatement(sql);
-            var rs = ps.executeQuery()){
+    try(Connection conexao = ConnectionFactory.obterConexao();
+          PreparedStatement ps = conexao.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery()){
         //6. Manipular os dados da tabela
         while(rs.next()){
           int codigo = rs.getInt("cod_pessoa");
           String nome = rs.getString("nome");
           String fone = rs.getString("fone");
           String email = rs.getString("email");
-          var p = new Pessoa(codigo, nome, fone, email);
+          Pessoa p = new Pessoa(codigo, nome, fone, email);
           pessoas.add(p);
         }
         //7. Fechar os recursos

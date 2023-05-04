@@ -1,3 +1,5 @@
+import java.util.*;
+
 import javax.swing.JOptionPane;
 
 public class Menu {
@@ -10,7 +12,7 @@ public class Menu {
     //6. Sair
     String opcoes = "1-Cadastrar\n2-Atualizar\n3-Remover\n4-Visualizar uma pessoa\n5-Visualizar todas as pessoas\n6-Sair";
     int op = 6;
-    var dao = new PessoaDAO();
+    PessoaDAO dao = new PessoaDAO();
     do{
       try{
         op = Integer.parseInt(JOptionPane.showInputDialog(opcoes));
@@ -43,16 +45,16 @@ public class Menu {
             break;
           }
           case 5:{
-            var pessoas = dao.listar();
+            List<Pessoa> pessoas = dao.listar();
             StringBuilder sb = new StringBuilder("");
             //for each
             //enhanced for
             for (Pessoa p : pessoas){
-              System.out.println(p);
+              sb.append(p).append("\n");
             }
-            
-
-
+            JOptionPane.showMessageDialog(null, sb);
+            // for (int i = 0; i < pessoas.size(); i++){
+            //   System.out.println(pessoas.get(i));
           }
         }
       }
