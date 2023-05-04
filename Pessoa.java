@@ -7,14 +7,19 @@ public class Pessoa {
   public Pessoa(){}
 
   public Pessoa(String nome, String fone, String email){
+    this(0, nome, fone, email);  
+  }
+  
+  public Pessoa (int codigo, String nome, String fone, String email){
+    setCodigo(codigo);  
     setNome(nome);
     setFone(fone);
     setEmail(email);
   }
-  
   public Pessoa(int codigo){
-    setCodigo(codigo);
+    this(codigo, null, null, null);
   }
+
   
   public int getCodigo() {
     return codigo;

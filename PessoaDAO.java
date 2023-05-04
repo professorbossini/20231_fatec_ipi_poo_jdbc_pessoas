@@ -1,6 +1,8 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.LinkedList;
+import java.util.List;
 //data access object
 public class PessoaDAO {
   //CRUD: CREATE, READ, UPDATE, DELETE
@@ -49,6 +51,32 @@ public class PessoaDAO {
       ps.setInt(1, codigo);
       ResultSet rs = ps.executeQuery();
       return rs.next() ? new Pessoa(rs.getString("nome"), rs.getString("fone"), rs.getString("email")) : null;
+    }
+  }
+
+  List <Pessoa> listar() throws Exception{
+    List <Pessoa> pessoas = new LinkedList <>();
+    //1. Especificar o comando SQL (SELECT)
+    String sql = "SELECT * FROM tb_pessoa";
+    //2. Abrir uma conexão com o PostgreSQL
+    //3. Preparar o comando
+    //4. Substituir os eventuais placeholders
+    //5. Executar
+    try(var conexao = ConnectionFactory.obterConexao();
+          var ps = conexao.prepareStatement(sql);
+            var rs = ps.executeQuery()){
+        //6. Manipular os dados da tabela
+        while(rs.next()){
+          int codigo = rs.getInt("cod_pessoa");
+          String nome = rs.getString("nome");
+          String fone = rs.getString("fone");
+          String email = rs.getString("email");
+          var p = new Pessoa(codigo, nome, fone, email);
+          pessoas.add(p);
+        }
+        //7. Fechar os recursos
+        // já foi feito pelo try-with-resources
+        return pessoas;
     }
   }
 

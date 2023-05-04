@@ -42,6 +42,18 @@ public class Menu {
               JOptionPane.showMessageDialog(null, "Pessoa não existe");
             break;
           }
+          case 5:{
+            var pessoas = dao.listar();
+            StringBuilder sb = new StringBuilder("");
+            //for each
+            //enhanced for
+            for (Pessoa p : pessoas){
+              System.out.println(p);
+            }
+            
+
+
+          }
         }
       }
       catch (Exception e){
